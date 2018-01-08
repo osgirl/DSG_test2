@@ -6,14 +6,14 @@ package bean;
 
 public class VenueDetail {
 
-    int id;
+    String id;
     String name;
     String verified;
     String url;
     String rationColor;
     String ratingSignals;
     String rating;
-    int storeId;
+    String storeId;
     String address;
     String latitute;
     String langitute;
@@ -26,16 +26,16 @@ public class VenueDetail {
     String twitter;
     String facebook;
     String faceBookName;
-    int photoId;
+    String photoId;
     int createdAt;
     String Photo_url;
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -87,11 +87,11 @@ public class VenueDetail {
         this.rating = rating;
     }
 
-    public int getStoreId() {
+    public String getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(int storeId) {
+    public void setStoreId(String storeId) {
         this.storeId = storeId;
     }
 
@@ -191,11 +191,11 @@ public class VenueDetail {
         this.faceBookName = faceBookName;
     }
 
-    public int getPhotoId() {
+    public String getPhotoId() {
         return photoId;
     }
 
-    public void setPhotoId(int photoId) {
+    public void setPhotoId(String photoId) {
         this.photoId = photoId;
     }
 

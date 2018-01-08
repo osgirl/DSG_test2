@@ -73,11 +73,11 @@ public class VenueAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             view_holder.txt_fb.setText(details.getFacebook());
             view_holder.txt_fbname.setText(details.getFaceBookName());
             view_holder.txt_photoid.setText(details.getPhotoId());
-            view_holder.txt_createrid.setText(details.getCreatedAt());
+            view_holder.txt_createrid.setText(String.valueOf(details.getCreatedAt()));
 
 
-            Picasso.with(m_context).load(details.getPhoto_url()).resize(120, 60).into(view_holder.img_photoUrl);
-            Picasso.with(m_context).load(details.getUrl()).resize(120, 60).into(view_holder.img_url);
+            Picasso.with(m_context).load(details.getPhoto_url()).resize(100, 100).into(view_holder.img_photoUrl);
+            Picasso.with(m_context).load(details.getUrl()).resize(100, 100).into(view_holder.img_url);
         }
     }
 

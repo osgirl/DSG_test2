@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             e1.printStackTrace();
         }
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.POST, ServerUtils.URL, jsonObject, new Response.Listener<JSONObject>() {
+                (Request.Method.GET, ServerUtils.URL, jsonObject, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -104,30 +104,31 @@ public class MainActivity extends AppCompatActivity {
 
                                         JSONObject obj=array.optJSONObject(i);
                                         VenueDetail venueDetails= new VenueDetail();
-                                        venueDetails.setId(obj.getInt("id"));
+                                        venueDetails.setId(obj.getString("id"));
                                         venueDetails.setName(obj.getString("name"));
                                         venueDetails.setVerified(obj.getString("verified"));
-                                        venueDetails.setUrl(obj.getString("url"));
-                                        venueDetails.setRationColor(obj.getString("ratingColor"));
-                                        venueDetails.setRatingSignals(obj.getString("ratingSignals"));
-                                        venueDetails.setRating(obj.getString("rating"));
-                                        venueDetails.setStoreId(obj.getInt("storeId"));
+                                        venueDetails.setUrl(obj.optString("url",null));
+                                        venueDetails.setRationColor(obj.optString("ratingColor",null));
+                                        venueDetails.setRatingSignals(obj.optString("ratingSignals",null));
+                                        venueDetails.setRating(obj.optString("rating",null));
+                                        venueDetails.setStoreId(obj.optString("storeId",null));
 
-
-                                        JSONObject jlocation=obj.getJSONObject("location");
-                                        venueDetails.setAddress( jlocation.getString("address"));
-                                        venueDetails.setLatitute( jlocation.getString("latitude"));
-                                        venueDetails.setLangitute( jlocation.getString("longitude"));
-                                        venueDetails.setPostalCode( jlocation.getString("postalCode"));
-                                        venueDetails.setCc( jlocation.getString("cc"));
-                                        venueDetails.setCity( jlocation.getString("city"));
-                                        venueDetails.setState( jlocation.getString("state"));
-                                        venueDetails.setCountry( jlocation.getString("country"));
+                                        if (!obj.isNull("location")) {
+                                            JSONObject jlocation = obj.getJSONObject("location");
+                                            venueDetails.setAddress(jlocation.getString("address"));
+                                            venueDetails.setLatitute(jlocation.getString("latitude"));
+                                            venueDetails.setLangitute(jlocation.getString("longitude"));
+                                            venueDetails.setPostalCode(jlocation.getString("postalCode"));
+                                            venueDetails.setCc(jlocation.getString("cc"));
+                                            venueDetails.setCity(jlocation.getString("city"));
+                                            venueDetails.setState(jlocation.getString("state"));
+                                            venueDetails.setCountry(jlocation.getString("country"));
+                                        }
 
 
                                         JSONArray arrayContact=obj.getJSONArray("contacts");
-                                        for(int j=0;j<arrayContact.length();i++){
-                                            JSONObject objcontact=arrayContact.optJSONObject(i);
+                                        for(int j=0;j<arrayContact.length();j++){
+                                            JSONObject objcontact=arrayContact.optJSONObject(j);
                                             venueDetails.setPhone( objcontact.getString("phone"));
                                             venueDetails.setTwitter( objcontact.getString("twitter"));
                                             venueDetails.setFacebook( objcontact.getString("facebook"));
@@ -136,9 +137,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                                         JSONArray arrayPhoto=obj.getJSONArray("photos");
-                                        for(int j=0;j<arrayPhoto.length();i++){
-                                            JSONObject objphoto=arrayPhoto.optJSONObject(i);
-                                            venueDetails.setPhotoId( objphoto.getInt("photoId"));
+                                        for(int k=0;k<arrayPhoto.length();k++){
+                                            JSONObject objphoto=arrayPhoto.optJSONObject(k);
+                                            venueDetails.setPhotoId( objphoto.getString("photoId"));
                                             venueDetails.setCreatedAt( objphoto.getInt("createdAt"));
                                             venueDetails.setPhoto_url( objphoto.getString("url"));
 
